@@ -25,7 +25,7 @@ namespace Lab6Particles
             Direction = random.Next(360);
             Speed = random.Next(10) + 1;
             Radius = random.Next(10) + 2;
-            Life = random.Next(100) + 20;
+            Life = random.Next(121) + 20;
         }
 
         public void Draw(Graphics g)
