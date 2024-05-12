@@ -68,6 +68,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -81,6 +82,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\garrick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\volodya.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\garrick1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\volodya1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hogwarts.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hog.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hog1.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hog2.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hog3.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hog.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\volodya2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\garrick2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

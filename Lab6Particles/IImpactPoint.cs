@@ -46,7 +46,7 @@ namespace Lab6Particles
 
     public class AntiGravityPoint : IImpactPoint
     {
-        public int Power = 100;
+        public float Power = 5f;
 
         public override void ImpactParticle(Particle particle)
         {
@@ -56,8 +56,9 @@ namespace Lab6Particles
 
             float r2 = (float)Math.Max(100, gX * gX + gY * gY);
 
-            particle.SpeedX -= (gX) * Power / r2;
+            particle.SpeedX -= (gX) * 1.07f* Power / r2;
             particle.SpeedY -= (gY) * Power / r2;
         }
     }
+
 }

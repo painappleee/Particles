@@ -15,18 +15,6 @@ namespace Lab6Particles
 
         public static Random random = new Random();
 
-        public Particle()
-        {
-            var direction = (double)random.Next(360);
-            var speed = random.Next(10) + 1;
-
-            SpeedX = (float)(Math.Cos(direction/180*Math.PI) * speed);
-            SpeedY = -(float)(Math.Sin(direction/180 * Math.PI) * speed);
-
-            Radius = random.Next(10) + 2;
-            Life = random.Next(121) + 20;
-
-        }
 
         public virtual void Draw(Graphics g)
         {
@@ -64,7 +52,7 @@ namespace Lab6Particles
         {
             float k = Math.Min(1f, Life / 100);
 
-            var color = MixColor(FromColor, ToColor, k);
+            var color = MixColor(ToColor, FromColor, k);
             var b = new SolidBrush(color);
 
             g.FillEllipse(b, X - Radius, Y - Radius, Radius * 2, Radius * 2);
