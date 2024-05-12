@@ -12,6 +12,8 @@ namespace Lab6Particles
         List<Particle> particles = new List<Particle>();
         public List<IImpactPoint> gravityPoints = new List<IImpactPoint>();
 
+        public int ParticlesCount = 500;
+
 
         public float GravitationX = 0;
         public float GravitationY = 0;
@@ -19,6 +21,7 @@ namespace Lab6Particles
         public int MousePositionX = 0;
         public int MousePositionY = 0;
 
+        
         public void UpdateState()
         {
             foreach (var particle in particles)
@@ -27,19 +30,7 @@ namespace Lab6Particles
 
                 if (particle.Life < 0)
                 {
-                    particle.Life = 20 + Particle.random.Next(100);
-
-                    particle.X = MousePositionX;
-                    particle.Y = MousePositionY;
-
-                    var direction = (double)Particle.random.Next(360);
-                    var speed = Particle.random.Next(10) + 1;
-
-                    particle.SpeedX = (float)(Math.Cos(direction / 180 * Math.PI) * speed);
-                    particle.SpeedY = -(float)(Math.Sin(direction / 180 * Math.PI) * speed);
-
-
-                    particle.Radius = Particle.random.Next(10) + 2;
+                    ResetParticle(particle);
                 }
                 else
                 {
@@ -61,15 +52,15 @@ namespace Lab6Particles
 
             for (var i = 0; i < 10; ++i)
             {
-                if (particles.Count < 500)
+                if (particles.Count < ParticlesCount)
                 {
                     var particle = new ParticleColorful();
 
                     particle.FromColor = Color.Yellow;
                     particle.ToColor = Color.FromArgb(0, Color.Magenta);
 
-                    particle.X = MousePositionX;
-                    particle.Y = MousePositionY;
+                    ResetParticle(particle);
+
                     particles.Add(particle);
                 }
                 else
@@ -78,6 +69,23 @@ namespace Lab6Particles
                 }
 
             }
+        }
+
+        public virtual void ResetParticle(Particle particle)
+        {
+            particle.Life = 20 + Particle.random.Next(100);
+
+            particle.X = MousePositionX;
+            particle.Y = MousePositionY;
+
+            var direction = (double)Particle.random.Next(360);
+            var speed = Particle.random.Next(10) + 1;
+
+            particle.SpeedX = (float)(Math.Cos(direction / 180 * Math.PI) * speed);
+            particle.SpeedY = -(float)(Math.Sin(direction / 180 * Math.PI) * speed);
+
+
+            particle.Radius = Particle.random.Next(10) + 2;
         }
 
         public void Render(Graphics g)
@@ -94,4 +102,22 @@ namespace Lab6Particles
         }
 
     }
+
+    public class TopEmitter : Emitter
+    {
+        public int Width;
+
+        public override void ResetParticle(Particle particle)
+        {
+            base.ResetParticle(particle);
+
+            particle.X = Particle.random.Next(Width);
+            particle.Y = 0;
+
+            particle.SpeedY = 1;
+            particle.SpeedX = Particle.random.Next(-2, 2);
+        }
+    }
 }
+
+

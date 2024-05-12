@@ -12,13 +12,19 @@ namespace Lab6Particles
 {
     public partial class Form1 : Form
     {
-        Emitter emitter = new Emitter();
+        Emitter emitter;
         public Form1()
         {
             InitializeComponent();
 
             picDisplay.Image = new Bitmap(picDisplay.Width, picDisplay.Height);
 
+            emitter = new TopEmitter
+            {
+                Width = picDisplay.Width,
+                GravitationY = 0.25f,
+                ParticlesCount = 500
+            };
 
             emitter.gravityPoints.Add(new GravityPoint
             {
@@ -37,6 +43,7 @@ namespace Lab6Particles
                 X = (float)(picDisplay.Width * 0.75),
                 Y = picDisplay.Height / 2
             });
+            
 
         }
 
