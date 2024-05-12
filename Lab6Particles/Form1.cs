@@ -67,30 +67,60 @@ namespace Lab6Particles
             lblGravitation.Text = ((GravityPoint)emitter.impactPoints[0]).Power+"";
             */
 
-            int offset = 25;
-            List<GravityPoint> gpoints = new List<GravityPoint>();
-           
+            int offsetAngle = 4;
 
-            for (int i=0; i < 5; i++)
+            float R = Math.Abs((int)picDisplay.Width / 2 - emitterV.X);
+
+            for (int i=0; i < 3; i++)
             {
-                AntiGravityPoint point1 = new AntiGravityPoint();
-                point1.X = picDisplay.Width / 2;
-                point1.Y = offset * i + picDisplay.Height/2+25;
+                float alphaV = emitterV.Direction+offsetAngle*i;
 
-               
+                float dXV = R * (float)Math.Cos(alphaV / 180 * Math.PI);
+                float dYV = R * (float)Math.Sin(alphaV / 180 * Math.PI);
 
-                emitterV.impactPoints.Add(point1);
+                AntiGravityPoint AgPoint1V = new AntiGravityPoint();
+                AgPoint1V.X = emitterV.X + dXV;
+                AgPoint1V.Y = emitterV.Y + dYV;
+
+                emitterG.impactPoints.Add( AgPoint1V );
+
                 if (i != 0)
                 {
-                    AntiGravityPoint point2 = new AntiGravityPoint();
-                    point2.X = picDisplay.Width / 2;
-                    point2.Y = -offset * i + picDisplay.Height / 2+25;
-                    emitterV.impactPoints.Add(point2);
-                    emitterG.impactPoints.Add(point2);
-                }
-                
+                    AntiGravityPoint AgPoint2V = new AntiGravityPoint();
+                    AgPoint2V.X = emitterV.X + dXV;
+                    AgPoint2V.Y = emitterV.Y - dYV;
 
-                emitterG.impactPoints.Add(point1);  
+                    emitterG.impactPoints.Add( AgPoint2V );
+
+                }
+
+                float alphaG = emitterG.Direction - offsetAngle * i;
+
+                float dXG = R * (float)Math.Cos(alphaG / 180 * Math.PI);
+                float dYG = R * (float)Math.Sin(alphaG / 180 * Math.PI);
+
+                AntiGravityPoint AgPoint1G = new AntiGravityPoint();
+                AgPoint1G.X = emitterG.X + dXG;
+                AgPoint1G.Y = emitterG.Y + dYG;
+
+                emitterV.impactPoints.Add(AgPoint1G);
+
+                if (i != 0)
+                {
+                    AntiGravityPoint AgPoint2G = new AntiGravityPoint();
+                    AgPoint2G.X = emitterG.X + dXG;
+                    AgPoint2G.Y = emitterG.Y - dYG;
+
+                    emitterV.impactPoints.Add(AgPoint2G);
+
+                }
+
+
+
+
+
+
+
 
             }
 

@@ -121,7 +121,12 @@ namespace Lab6Particles
                 particle.Draw(g);
             }
 
-
+            /*
+            foreach (var particle in impactPoints)
+            {
+                particle.Render(g);
+            }
+            */
 
         }
 
