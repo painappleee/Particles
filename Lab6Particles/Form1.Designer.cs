@@ -38,7 +38,7 @@
             // 
             this.picDisplay.Location = new System.Drawing.Point(2, 3);
             this.picDisplay.Name = "picDisplay";
-            this.picDisplay.Size = new System.Drawing.Size(657, 449);
+            this.picDisplay.Size = new System.Drawing.Size(778, 637);
             this.picDisplay.TabIndex = 0;
             this.picDisplay.TabStop = false;
             this.picDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picDisplay_MouseMove);
@@ -53,7 +53,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 453);
+            this.ClientSize = new System.Drawing.Size(779, 643);
             this.Controls.Add(this.picDisplay);
             this.Name = "Form1";
             this.Text = "Form1";

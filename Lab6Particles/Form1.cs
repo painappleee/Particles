@@ -19,10 +19,25 @@ namespace Lab6Particles
 
             picDisplay.Image = new Bitmap(picDisplay.Width, picDisplay.Height);
 
-            emitter.gravityPoints.Add(new Point(
-                picDisplay.Width/2, picDisplay.Height/2
-            ));
-           
+
+            emitter.gravityPoints.Add(new GravityPoint
+            {
+                X = (float)(picDisplay.Width * 0.25),
+                Y = picDisplay.Height / 2
+            });
+
+            emitter.gravityPoints.Add(new AntiGravityPoint
+            {
+                X = picDisplay.Width / 2,
+                Y = picDisplay.Height / 2
+            });
+
+            emitter.gravityPoints.Add(new GravityPoint
+            {
+                X = (float)(picDisplay.Width * 0.75),
+                Y = picDisplay.Height / 2
+            });
+
         }
 
 

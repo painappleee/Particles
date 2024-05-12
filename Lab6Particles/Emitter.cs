@@ -10,11 +10,11 @@ namespace Lab6Particles
     public class Emitter
     {
         List<Particle> particles = new List<Particle>();
-        public List<Point> gravityPoints = new List<Point>();
+        public List<IImpactPoint> gravityPoints = new List<IImpactPoint>();
 
 
         public float GravitationX = 0;
-        public float GravitationY = 1;
+        public float GravitationY = 0;
 
         public int MousePositionX = 0;
         public int MousePositionY = 0;
@@ -43,14 +43,11 @@ namespace Lab6Particles
                 }
                 else
                 {
-                    float gX = gravityPoints[0].X - particle.X;
-                    float gY = gravityPoints[0].Y - particle.Y;
+                    foreach (var point in gravityPoints)
+                    {
+                        point.ImpactParticle(particle);
+                    }
 
-                    float r2 = gX*gX + gY * gY;
-                    float M = 100;
-
-                    particle.SpeedX += (gX) * M / r2;
-                    particle.SpeedY += (gY) * M / r2;
 
                     particle.SpeedX += GravitationX;
                     particle.SpeedY += GravitationY;
@@ -92,13 +89,7 @@ namespace Lab6Particles
 
             foreach (var point in gravityPoints)
             {
-                g.FillEllipse(
-                    new SolidBrush(Color.Orange),
-                    point.X-5,
-                    point.Y-5,
-                    10,
-                    10
-                 );
+                point.Render(g);
             }
         }
 
