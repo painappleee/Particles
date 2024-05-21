@@ -56,8 +56,79 @@ namespace Lab6Particles
 
             float r2 = (float)Math.Max(100, gX * gX + gY * gY);
 
-            particle.SpeedX -= (gX) *  Power / r2;
+            particle.SpeedX -= (gX) * Power / r2;
             particle.SpeedY -= (gY) * Power / r2;
+        }
+    }
+
+    public class DirectAntiGravityPoint : AntiGravityPoint
+    {
+        public Emitter emitter;
+        public float R;
+        public float angle = 0;
+        public float offsetX = 0;
+
+        public List<AntiGravityPoint> SubPoints;
+
+        public DirectAntiGravityPoint(Emitter emitter, float R, int SubPointsNum = 4)
+        {
+            SubPoints = new List<AntiGravityPoint>();
+            this.emitter = emitter;
+            this.R = R;
+            for (int i = 0; i < SubPointsNum; i++)
+            {
+                AntiGravityPoint point = new AntiGravityPoint();
+                SubPoints.Add(point);
+            }
+        }
+
+        public void Rotate(float ang)
+        {
+            this.angle = ang;
+            float dx = (float)(R * Math.Cos(angle / 180 * Math.PI));
+            float dy = (float)(R * Math.Sin(angle / 180 * Math.PI));
+
+            X = emitter.X + dx + offsetX;
+            Y = emitter.Y + dy;
+
+            UpdateSubpoints();
+        }
+
+        public void Move(float offsetX)
+        {
+            this.offsetX = offsetX;
+            // 8.65
+            // 7 (0.0047)
+            // 16.5 (0.0224)
+
+            foreach (var point in SubPoints)
+            {
+                point.Power = Power;
+            }
+            Rotate(angle);
+            UpdateSubpoints();
+        }
+
+        public void UpdateSubpoints()
+        {
+            float angleOffset = 4;
+            for (int i = 0; i < SubPoints.Count / 2; i++)
+            {
+                float ang = angle + angleOffset * (i + 1);
+                float dx = (float)(R * Math.Cos(ang / 180 * Math.PI));
+                float dy = (float)(R * Math.Sin(ang / 180 * Math.PI));
+                SubPoints[i].X = emitter.X + dx + offsetX;
+                SubPoints[i].Y = emitter.Y + dy;
+            }
+            for (int i = SubPoints.Count / 2; i < SubPoints.Count; i++)
+            {
+                float ang = angle - angleOffset * ((i - SubPoints.Count / 2) + 1);
+                float dx = (float)(R * Math.Cos(ang / 180 * Math.PI));
+                float dy = (float)(R * Math.Sin(ang / 180 * Math.PI));
+                SubPoints[i].X = emitter.X + dx + offsetX;
+                SubPoints[i].Y = emitter.Y + dy;
+            }
+
         }
     }
 

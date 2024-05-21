@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Lab6Particles
 {
@@ -14,29 +15,27 @@ namespace Lab6Particles
 
         public int X;
         public int Y;
-        public int Direction=0;
+        public int Direction = 0;
         public int Spreading = 360;
         public int SpeedMin = 1;
         public int SpeedMax = 10;
         public int RadiusMin = 2;
         public int RadiusMax = 10;
-        public int LifeMin = 20;
-        public int LifeMax = 140;
+        public int LifeMin = 30;
+        public int LifeMax = 150;
 
-        public int ParticlesPerTick = 1;
+        public int ParticlesPerTick = 1 * 10;
 
         public Color ColorFrom = Color.White;
         public Color ColorTo = Color.FromArgb(0, Color.Black);
 
-        public int ParticlesCount = 500;
+        public int ParticlesCount = 500 * 4;
 
         public float GravitationX = 0;
         public float GravitationY = 0;
 
-        public int MousePositionX = 0;
-        public int MousePositionY = 0;
+        public DirectAntiGravityPoint DirectPoint;
 
-        
         public void UpdateState()
         {
             int particlesToCreate = ParticlesPerTick;
@@ -70,8 +69,6 @@ namespace Lab6Particles
                     particle.SpeedX += GravitationX;
                     particle.SpeedY += GravitationY;
 
-                    
-
                 }
 
             }
@@ -82,7 +79,11 @@ namespace Lab6Particles
                 var particle = CreateParticle();
                 ResetParticle(particle);
                 particles.Add(particle);
-               
+
+            }
+            if (DirectPoint != null)
+            {
+                Direction = (int)(90 - Math.Atan2(DirectPoint.X - X, Y - DirectPoint.Y) * 180 / Math.PI);
             }
         }
 
@@ -95,7 +96,7 @@ namespace Lab6Particles
 
             var direction = Direction
                 + (double)Particle.random.Next(Spreading)
-                - Spreading/2;
+                - Spreading / 2;
             var speed = Particle.random.Next(SpeedMin, SpeedMax);
 
             particle.SpeedX = (float)(Math.Cos(direction / 180 * Math.PI) * speed);
@@ -120,14 +121,11 @@ namespace Lab6Particles
             {
                 particle.Draw(g);
             }
-
-            /*
+            return;
             foreach (var particle in impactPoints)
             {
                 particle.Render(g);
             }
-            */
-
         }
 
     }
