@@ -32,8 +32,9 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.picDisplay = new System.Windows.Forms.PictureBox();
             this.DirectionTrackBar = new System.Windows.Forms.TrackBar();
-            this.DebugLabel = new System.Windows.Forms.Label();
             this.ForceTrackBar = new System.Windows.Forms.TrackBar();
+            this.AutoPlayCheck = new System.Windows.Forms.CheckBox();
+            this.ShowPointsCheck = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DirectionTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ForceTrackBar)).BeginInit();
@@ -65,15 +66,6 @@
             this.DirectionTrackBar.TickFrequency = 50;
             this.DirectionTrackBar.Scroll += new System.EventHandler(this.DirectionTrackBar_Scroll);
             // 
-            // DebugLabel
-            // 
-            this.DebugLabel.AutoSize = true;
-            this.DebugLabel.Location = new System.Drawing.Point(497, 590);
-            this.DebugLabel.Name = "DebugLabel";
-            this.DebugLabel.Size = new System.Drawing.Size(66, 16);
-            this.DebugLabel.TabIndex = 11;
-            this.DebugLabel.Text = "I\'m debug";
-            // 
             // ForceTrackBar
             // 
             this.ForceTrackBar.Location = new System.Drawing.Point(225, 574);
@@ -85,13 +77,36 @@
             this.ForceTrackBar.TickFrequency = 10;
             this.ForceTrackBar.Scroll += new System.EventHandler(this.ForceTrackBar_Scroll);
             // 
+            // AutoPlayCheck
+            // 
+            this.AutoPlayCheck.AutoSize = true;
+            this.AutoPlayCheck.Location = new System.Drawing.Point(685, 590);
+            this.AutoPlayCheck.Name = "AutoPlayCheck";
+            this.AutoPlayCheck.Size = new System.Drawing.Size(105, 20);
+            this.AutoPlayCheck.TabIndex = 13;
+            this.AutoPlayCheck.Text = "Автоиграть";
+            this.AutoPlayCheck.UseVisualStyleBackColor = true;
+            this.AutoPlayCheck.CheckedChanged += new System.EventHandler(this.AutoPlayCheck_CheckedChanged);
+            // 
+            // ShowPointsCheck
+            // 
+            this.ShowPointsCheck.AutoSize = true;
+            this.ShowPointsCheck.Location = new System.Drawing.Point(685, 622);
+            this.ShowPointsCheck.Name = "ShowPointsCheck";
+            this.ShowPointsCheck.Size = new System.Drawing.Size(150, 20);
+            this.ShowPointsCheck.TabIndex = 14;
+            this.ShowPointsCheck.Text = "Показывать точки";
+            this.ShowPointsCheck.UseVisualStyleBackColor = true;
+            this.ShowPointsCheck.CheckedChanged += new System.EventHandler(this.ShowPointsCheck_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1538, 654);
+            this.Controls.Add(this.ShowPointsCheck);
+            this.Controls.Add(this.AutoPlayCheck);
             this.Controls.Add(this.ForceTrackBar);
-            this.Controls.Add(this.DebugLabel);
             this.Controls.Add(this.DirectionTrackBar);
             this.Controls.Add(this.picDisplay);
             this.Name = "Form1";
@@ -109,8 +124,9 @@
         private System.Windows.Forms.PictureBox picDisplay;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TrackBar DirectionTrackBar;
-        private System.Windows.Forms.Label DebugLabel;
         private System.Windows.Forms.TrackBar ForceTrackBar;
+        private System.Windows.Forms.CheckBox AutoPlayCheck;
+        private System.Windows.Forms.CheckBox ShowPointsCheck;
     }
 }
 

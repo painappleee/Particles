@@ -15,6 +15,7 @@ namespace Lab6Particles
         List<Emitter> emitters = new List<Emitter>();
         Emitter emitterV;
         Emitter emitterG;
+        bool isAutoPlay = false;
         public Form1()
         {
             InitializeComponent();
@@ -50,6 +51,7 @@ namespace Lab6Particles
             float R = Math.Abs((int)picDisplay.Width / 2 - emitterV.X);
 
             emitterV.DirectPoint = new DirectAntiGravityPoint(emitterV, R);
+            emitterV.DirectPoint.SetColor(Color.Green);
 
             emitterG.impactPoints.Add(emitterV.DirectPoint);
             foreach (var point in emitterV.DirectPoint.SubPoints)
@@ -66,8 +68,20 @@ namespace Lab6Particles
             DirectionTrackBar_Scroll(null, null);
         }
 
+        int offsetPerTick = -2;
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (isAutoPlay)
+            {
+                if (ForceTrackBar.Value == ForceTrackBar.Maximum)
+                    offsetPerTick = -2;
+                if (ForceTrackBar.Value == ForceTrackBar.Minimum)
+                    offsetPerTick = 2;
+
+                ForceTrackBar.Value += offsetPerTick;
+                ForceTrackBar_Scroll(null, null);
+            }
+
             emitterV.UpdateState();
             emitterG.UpdateState();
 
@@ -80,7 +94,6 @@ namespace Lab6Particles
                 emitterG.Render(g);
             }
 
-            DebugLabel.Text = $"V.Power: {emitterV.DirectPoint.Power} | G.Power: {emitterG.DirectPoint.Power}";
             picDisplay.Invalidate();
         }
 
@@ -126,6 +139,31 @@ namespace Lab6Particles
                 emitterV.Spreading = (int)(10 + 0.027f * Math.Abs(offset));
                 emitterG.Spreading = 10;
             }
+        }
+
+        private void AutoPlayCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            isAutoPlay = AutoPlayCheck.Checked;
+            if (isAutoPlay)
+            {
+                DirectionTrackBar.Enabled = false;
+                ForceTrackBar.Enabled = false;
+
+                DirectionTrackBar.Value = 0;
+                ForceTrackBar.Value = 0;
+                DirectionTrackBar_Scroll(null, null);
+                ForceTrackBar_Scroll(null, null);
+            }
+            else
+            {
+                DirectionTrackBar.Enabled = true;
+                ForceTrackBar.Enabled = true;
+            }
+        }
+
+        private void ShowPointsCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            Emitter.ShowPoints = ShowPointsCheck.Checked;
         }
     }
 }

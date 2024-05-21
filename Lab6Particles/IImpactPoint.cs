@@ -11,13 +11,14 @@ namespace Lab6Particles
     {
         public float X;
         public float Y;
+        public Color color = Color.Red;
 
         public abstract void ImpactParticle(Particle particle);
 
         public void Render(Graphics g)
         {
             g.FillEllipse(
-                   new SolidBrush(Color.Red),
+                   new SolidBrush(color),
                    X - 5,
                    Y - 5,
                    10,
@@ -97,9 +98,6 @@ namespace Lab6Particles
         public void Move(float offsetX)
         {
             this.offsetX = offsetX;
-            // 8.65
-            // 7 (0.0047)
-            // 16.5 (0.0224)
 
             foreach (var point in SubPoints)
             {
@@ -129,6 +127,15 @@ namespace Lab6Particles
                 SubPoints[i].Y = emitter.Y + dy;
             }
 
+        }
+
+        public void SetColor(Color col)
+        {
+            this.color = col;
+            foreach(var point in SubPoints)
+            {
+                point.color = col;
+            }
         }
     }
 

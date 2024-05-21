@@ -10,6 +10,7 @@ namespace Lab6Particles
 {
     public class Emitter
     {
+        public static bool ShowPoints = false;
         List<ParticleColorful> particles = new List<ParticleColorful>();
         public List<IImpactPoint> impactPoints = new List<IImpactPoint>();
 
@@ -121,10 +122,12 @@ namespace Lab6Particles
             {
                 particle.Draw(g);
             }
-            return;
-            foreach (var particle in impactPoints)
+            if (ShowPoints)
             {
-                particle.Render(g);
+                foreach (var particle in impactPoints)
+                {
+                    particle.Render(g);
+                }
             }
         }
 
